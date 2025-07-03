@@ -5,6 +5,7 @@ import {
 import { HomeLayout } from "@/Homelayout/homelayout";
 import HomeSection from "@/HomeSection/HomeSectio";
 import BookList from "@/Page/BookList";
+import CreateBook from "@/Page/Createbook";
 
 
 const router = createBrowserRouter([
@@ -13,13 +14,17 @@ const router = createBrowserRouter([
     element: <HomeLayout/>,
     children:[
         {
-            path: "/",
-            element : <HomeSection/>
+            path: '/',
+            element: <HomeSection/>
         },
         {
             path: '/books',
             element: <BookList></BookList>
             
+        },
+        {
+            path: '/create-book',
+            element: <CreateBook/>
         }
     ]
   },
