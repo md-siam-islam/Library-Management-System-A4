@@ -1,31 +1,51 @@
-import { useGetAllBooksQuery } from '@/redux/api/baseapi';
-import { useEffect, useState } from 'react';
+import { useDeleteBookMutation, useGetAllBooksQuery } from '@/redux/api/baseapi';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2'
 
-interface Book {
-  _id: string;
-  title: string;
-  author: string;
-  genre: string;
-  isbn: string;
-  copies: number;
-  available: boolean;
-}
 
 const BookList = () => {
+
+    const [deleteBook] = useDeleteBookMutation();
+
+   const BookdeleteFunc = async (id: string) => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  });
+
+  if (result.isConfirmed) {
+    try {
+      await deleteBook(id).unwrap(); 
+      Swal.fire(
+        'Deleted!',
+        'Your book has been deleted.',
+        'success'
+      );
+    } catch (error) {
+      Swal.fire(
+        'Error!',
+        'Failed to delete the book.',
+        'error'
+      );
+      console.error("Delete failed:", error);
+    }
+  }
+};
+
 
   const { data, error, isLoading } = useGetAllBooksQuery(undefined);
   console.log(data, error, isLoading);
 
-//   useEffect(() => {
-//     // Fetch books from API
-//     const fetchBooks = async () => {
-//       const response = await fetch('/api/books');
-//       const data = await response.json();
-//       setBooks(data);
-//     };
-//     fetchBooks();
-//   }, []);
+ if (isLoading) return <div className="text-center py-8">Loading books...</div>;
+  
+  if (error) return <div className="text-red-500 text-center py-8">
+    Error loading books! {"message" in error ? error.message : "Unknown error"}
+  </div>;
 
   return (
     <div className="container mx-auto p-4">
@@ -71,7 +91,7 @@ const BookList = () => {
                   >
                     Borrow
                   </Link>
-                  <button className="text-red-600 hover:underline">
+                  <button onClick={() => BookdeleteFunc (book._id)} className="text-red-600 hover:underline">
                     Delete
                   </button>
                 </td>
