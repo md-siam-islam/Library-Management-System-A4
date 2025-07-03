@@ -4,6 +4,8 @@ import {
 
 import { HomeLayout } from "@/Homelayout/homelayout";
 import HomeSection from "@/HomeSection/HomeSectio";
+import BookList from "@/Page/BookList";
+
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,11 @@ const router = createBrowserRouter([
         {
             path: "/",
             element : <HomeSection/>
+        },
+        {
+            path: '/books',
+            element: <BookList></BookList>
+            
         }
     ]
   },
