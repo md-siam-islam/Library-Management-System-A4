@@ -17,7 +17,6 @@ interface ApiResponse<T> {
   data: T;
 }
 
-
 export const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
@@ -40,6 +39,13 @@ export const baseApi = createApi({
                 method: "DELETE"
             })
         }),
+        borrowBook: builder.mutation<{ success: boolean }, { bookId: string; quantity: number; dueDate: string }>({
+            query: (body) => ({
+                url: "/borrow",
+                method: "POST",
+                body
+            })
+        }),
         createBook: builder.mutation<Book, Omit<Book, '_id'>>({
             query: (bookData) => ({
                 url: '/books',
@@ -50,4 +56,4 @@ export const baseApi = createApi({
     })
 })
 
-export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery } = baseApi;
+export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery , useBorrowBookMutation } = baseApi;

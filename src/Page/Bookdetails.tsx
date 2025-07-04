@@ -80,9 +80,9 @@ const Bookdetails = () => {
           <div className="border border-sky-600 rounded-lg p-4 h-fit">
             <h2 className="font-semibold text-lg mb-4 text-center text-sky-500">Book Actions</h2>
             <div className="space-y-3">
-              <Button asChild className="text-sky-500 hover:text-orange-600 border w-full py-1 px-2 rounded-2xl">
+              {/* <Button asChild className="text-sky-500 hover:text-orange-600 border w-full py-1 px-2 rounded-2xl">
                 <Link to={`/edit-book/${book.data._id}`}>Edit Book Details</Link>
-              </Button>
+              </Button> */}
               <Button asChild variant="secondary" className="text-sky-500 hover:text-orange-600 border w-full py-1 px-2 rounded-2xl">
                 <Link to={`/borrow/${book.data._id}`}>Borrow This Book</Link>
               </Button>
