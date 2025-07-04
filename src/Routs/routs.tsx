@@ -6,6 +6,7 @@ import { HomeLayout } from "@/Homelayout/homelayout";
 import HomeSection from "@/HomeSection/HomeSectio";
 import BookList from "@/Page/BookList";
 import CreateBook from "@/Page/Createbook";
+import Bookdetails from "@/Page/Bookdetails";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
         {
             path: '/create-book',
             element: <CreateBook/>
+        },
+        {
+            path: "/books/:id",
+            element: <Bookdetails/>
         }
     ]
   },

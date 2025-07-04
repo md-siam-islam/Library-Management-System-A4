@@ -78,22 +78,29 @@ const BookList = () => {
                     <span className="text-red-600">Unavailable</span>
                   )}
                 </td>
-                <td className="py-2 px-4 border">
+                <td className="py-2 px-4 border text-center">
                   <Link
                     to={`/edit-book/${book._id}`}
-                    className="mr-2 text-blue-600 hover:underline"
+                    className="mr-2 text-blue-600 hover:text-orange-600 border-2 py-1 px-2 rounded-2xl"
                   >
                     Edit
                   </Link>
                   <Link
                     to={`/borrow/${book._id}`}
-                    className="mr-2 text-green-600 hover:underline"
+                    className="mr-2 text-green-600 hover:text-orange-600 border-2 py-1 px-2 rounded-2xl"
                   >
                     Borrow
                   </Link>
-                  <button onClick={() => BookdeleteFunc (book._id)} className="text-red-600 hover:underline">
+                  <button onClick={() => BookdeleteFunc (book._id)} className="text-red-600 hover:text-orange-600 border-2 py-1 px-2 rounded-2xl">
                     Delete
                   </button>
+
+                   <Link
+                    to={`/books/${book._id}`}
+                    className="ml-2 text-sky-800 hover:text-orange-600 border-2 py-1 px-2 rounded-2xl"
+                  >
+                    View Details
+                  </Link>
                 </td>
               </tr>
             ))}
