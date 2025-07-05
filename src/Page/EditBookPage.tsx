@@ -107,89 +107,67 @@ const onSubmit = async (values: BookFormValues) => {
   }
 
     return (
-       <div className="container mx-auto p-4 max-w-2xl">
-      <div className="flex items-center mb-6">
-        <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h1 className="text-2xl font-bold ml-2">Edit {book?.data.title}</h1>
-      </div>
+     <div className="container mx-auto p-4 max-w-4xl">
+  {/* Header Section */}
+  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+    <div className="flex items-center">
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        onClick={() => navigate(-1)}
+        className="mr-2"
+      >
+        <ArrowLeft className="h-4 w-4" />
+      </Button>
+      <h1 className="text-xl sm:text-2xl font-bold">Edit {book?.data.title}</h1>
+    </div>
+    <div className="flex gap-2 w-full sm:w-auto">
+      <Button
+        type="button"
+        variant="outline"
+        onClick={() => navigate(`/books/${id}`)}
+        className="flex-1 sm:flex-none"
+      >
+        Cancel
+      </Button>
+      <Button 
+        type="submit" 
+        disabled={isUpdating}
+        className="flex-1 sm:flex-none"
+      >
+        {isUpdating ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <span className="hidden sm:inline">Updating...</span>
+          </>
+        ) : (
+          <>
+            <span className="inline sm:hidden">Update</span>
+            <span className="hidden sm:inline">Update Book</span>
+          </>
+        )}
+      </Button>
+    </div>
+  </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Title Field */}
-          <div className="space-y-2">
-            <label className="block font-medium">Title*</label>
-            <Input
-              {...form.register("title")}
-              placeholder="Book title"
-            />
-            {form.formState.errors.title && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.title.message}
-              </p>
-            )}
-          </div>
-
-          {/* Author Field */}
-          <div className="space-y-2">
-            <label className="block font-medium">Author*</label>
-            <Input
-              {...form.register("author")}
-              placeholder="Author name"
-            />
-            {form.formState.errors.author && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.author.message}
-              </p>
-            )}
-          </div>
-
-          {/* Genre Field */}
-          <div className="space-y-2">
-            <label className="block font-medium">Genre*</label>
-            <Input
-              {...form.register("genre")}
-              placeholder="Book genre"
-            />
-            {form.formState.errors.genre && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.genre.message}
-              </p>
-            )}
-          </div>
-
-          {/* ISBN Field */}
-          <div className="space-y-2">
-            <label className="block font-medium">ISBN*</label>
-            <Input
-              {...form.register("isbn")}
-              placeholder="International Standard Book Number"
-            />
-            {form.formState.errors.isbn && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.isbn.message}
-              </p>
-            )}
-          </div>
-
-          {/* Copies Field */}
-          <div className="space-y-2">
-            <label className="block font-medium">Copies*</label>
-            <Input
-              type="number"
-              min="0"
-              {...form.register("copies", { valueAsNumber: true })}
-            />
-            {form.formState.errors.copies && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.copies.message}
-              </p>
-            )}
-          </div>
+  {/* Form Section */}
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+    <div className="grid grid-cols-1 gap-6">
+      {/* Top Row - Single Column on Mobile */}
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <label className="block font-medium">Title*</label>
+          <Input
+            {...form.register("title")}
+            placeholder="Book title"
+          />
+          {form.formState.errors.title && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.title.message}
+            </p>
+          )}
         </div>
 
-        {/* Description Field */}
         <div className="space-y-2">
           <label className="block font-medium">Description</label>
           <Textarea
@@ -198,28 +176,66 @@ const onSubmit = async (values: BookFormValues) => {
             className="min-h-[100px]"
           />
         </div>
+      </div>
 
-        <div className="flex justify-end gap-4 pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => navigate(`/books/${id}`)}
-          >
-            Cancel
-          </Button>
-          <Button type="submit" disabled={isUpdating}>
-            {isUpdating ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Updating...
-              </>
-            ) : (
-              "Update Book"
-            )}
-          </Button>
+      {/* Bottom Row - Grid on Desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="block font-medium">Author*</label>
+          <Input
+            {...form.register("author")}
+            placeholder="Author name"
+          />
+          {form.formState.errors.author && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.author.message}
+            </p>
+          )}
         </div>
-      </form>
+
+        <div className="space-y-2">
+          <label className="block font-medium">Genre*</label>
+          <Input
+            {...form.register("genre")}
+            placeholder="Book genre"
+          />
+          {form.formState.errors.genre && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.genre.message}
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <label className="block font-medium">ISBN*</label>
+          <Input
+            {...form.register("isbn")}
+            placeholder="International Standard Book Number"
+          />
+          {form.formState.errors.isbn && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.isbn.message}
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <label className="block font-medium">Copies*</label>
+          <Input
+            type="number"
+            min="0"
+            {...form.register("copies", { valueAsNumber: true })}
+          />
+          {form.formState.errors.copies && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.copies.message}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
+  </form>
+</div>
     )
 }
 
