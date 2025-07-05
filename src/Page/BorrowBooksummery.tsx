@@ -1,5 +1,5 @@
 import { useGetBorrowSummaryQuery } from '@/redux/api/baseapi';
-import { Loader2, AlertCircle, Calendar, Book, User } from 'lucide-react';
+import { Loader2, AlertCircle, Calendar, Book } from 'lucide-react';
 import { format } from 'date-fns';
 
 const BorrowSummary = () => {

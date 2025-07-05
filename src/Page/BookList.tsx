@@ -130,7 +130,7 @@ const BookList = () => {
             </td>
             <td className="py-3 px-4 space-x-2">
               <Link
-                to={`/edite-book/${book._id}`}
+                to={`/edit-book/${book._id}`}
                 className="inline-flex items-center px-3 py-1 border border-blue-300 rounded-md shadow-sm text-sm font-medium text-blue-600 bg-white hover:bg-blue-50"
               >
                 Edit

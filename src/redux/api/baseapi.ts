@@ -33,7 +33,7 @@ interface Borrowbooksum<T> {
 
 export const baseApi = createApi({
     reducerPath: "baseApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://library-backend-psi.vercel.app/api" }),
     endpoints: (builder) => ({
         getAllBooks: builder.query<Book[], void>({
             query: () => ({

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             element : <BorrowSummary/>
         },
         {
-            path : "/edite-book/:id",
+            path : "/edit-book/:id",
             element : <EditBookPage/>
         }
     ]
