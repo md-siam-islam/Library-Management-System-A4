@@ -30,6 +30,7 @@ const BorrowBookPage = () => {
 
   const { data: book, error } = useGetBookQuery(bookId!);
   const [borrowBook, { isLoading }] = useBorrowBookMutation();
+  console.log(borrowBook);
 
   const form = useForm<BorrowForm>({
     resolver: zodResolver(schema),

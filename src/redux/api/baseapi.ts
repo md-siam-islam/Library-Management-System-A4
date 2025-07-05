@@ -12,9 +12,23 @@ interface Book {
 }
 
 interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
+    success: boolean;
+    message: string;
+    data: T;
+}
+interface BorrowSummaryItem {
+  _id: string;
+  title: string;
+  isbn: string;
+  author : string;
+  totalBorrowed: number;
+  dueDate : string
+}
+
+interface Borrowbooksum<T> {
+    message : string,
+    success : string
+    data : T ;
 }
 
 export const baseApi = createApi({
@@ -33,6 +47,9 @@ export const baseApi = createApi({
                 method: "GET",
             })
         }),
+        getBorrowSummary: builder.query<Borrowbooksum<BorrowSummaryItem[]>, void>({
+        query: () => '/borrow/summary',
+            }),
         deleteBook: builder.mutation<void, string>({
             query: (id) => ({
                 url: `/books/${id}`,
@@ -56,4 +73,4 @@ export const baseApi = createApi({
     })
 })
 
-export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery , useBorrowBookMutation } = baseApi;
+export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery , useBorrowBookMutation , useGetBorrowSummaryQuery} = baseApi;
