@@ -80,7 +80,7 @@ const BookList = () => {
                 </td>
                 <td className="py-2 px-4 border text-center">
                   <Link
-                    to={`/edit-book/${book._id}`}
+                    to={`/edite-book/${book._id}`}
                     className="mr-2 text-blue-600 hover:text-orange-600 border-2 py-1 px-2 rounded-2xl"
                   >
                     Edit

@@ -17,18 +17,18 @@ interface ApiResponse<T> {
     data: T;
 }
 interface BorrowSummaryItem {
-  _id: string;
-  title: string;
-  isbn: string;
-  author : string;
-  totalBorrowed: number;
-  dueDate : string
+    _id: string;
+    title: string;
+    isbn: string;
+    author: string;
+    totalBorrowed: number;
+    dueDate: string
 }
 
 interface Borrowbooksum<T> {
-    message : string,
-    success : string
-    data : T ;
+    message: string,
+    success: string
+    data: T;
 }
 
 export const baseApi = createApi({
@@ -48,8 +48,8 @@ export const baseApi = createApi({
             })
         }),
         getBorrowSummary: builder.query<Borrowbooksum<BorrowSummaryItem[]>, void>({
-        query: () => '/borrow/summary',
-            }),
+            query: () => '/borrow/summary',
+        }),
         deleteBook: builder.mutation<void, string>({
             query: (id) => ({
                 url: `/books/${id}`,
@@ -70,7 +70,14 @@ export const baseApi = createApi({
                 body: bookData,
             })
         }),
-    })
+        updateBook: builder.mutation<Book,{ id: string; data: Partial<Book>}>({
+            query: ({ id, data }) => ({
+                url: `/books/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+        }),
+    }),
 })
 
-export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery , useBorrowBookMutation , useGetBorrowSummaryQuery} = baseApi;
+export const { useGetAllBooksQuery, useDeleteBookMutation, useCreateBookMutation, useGetBookQuery, useBorrowBookMutation, useGetBorrowSummaryQuery , useUpdateBookMutation} = baseApi;
